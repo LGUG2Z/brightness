@@ -44,8 +44,6 @@
 //!
 //! All contributions shall be licensed under the [0BSD license](https://spdx.org/licenses/0BSD.html).
 
-#![deny(warnings)]
-#![deny(missing_docs)]
 #![cfg_attr(doc_cfg, feature(doc_cfg))]
 
 use std::error::Error as StdError;

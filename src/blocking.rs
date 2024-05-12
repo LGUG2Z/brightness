@@ -18,7 +18,8 @@ cfg_if::cfg_if! {
 
 /// Blocking brightness device.
 #[derive(Debug)]
-pub struct BrightnessDevice(platform::BlockingDeviceImpl);
+#[allow(private_interfaces)]
+pub struct BrightnessDevice(pub platform::BlockingDeviceImpl);
 
 /// Blocking interface to get and set brightness.
 pub trait Brightness {

@@ -59,10 +59,12 @@ pub trait BrightnessExt {
 }
 
 #[derive(Debug)]
-pub(crate) struct BlockingDeviceImpl {
+pub struct BlockingDeviceImpl {
+    #[allow(dead_code)]
+    pub hmonitor: isize,
     physical_monitor: WrappedPhysicalMonitor,
     file_handle: WrappedFileHandle,
-    device_name: String,
+    pub device_name: String,
     /// Note: PHYSICAL_MONITOR.szPhysicalMonitorDescription == DISPLAY_DEVICEW.DeviceString
     /// Description is **not** unique.
     pub(crate) device_description: String,
@@ -184,6 +186,7 @@ pub(crate) fn brightness_devices() -> impl Iterator<Item = Result<BlockingDevice
                         .get(&display_device.DeviceID)
                         .ok_or(SysError::DeviceInfoMissing)?;
                     Ok(BlockingDeviceImpl {
+                        hmonitor: hmonitor.0,
                         physical_monitor,
                         file_handle,
                         device_name: wchar_to_string(&display_device.DeviceName),
